@@ -6,14 +6,15 @@
   <title>Harsha Nimmagadda | Portfolio</title>
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-soft: #121a33;
-      --card: #111936;
+      --bg: #070b18;
+      --bg-soft: #101936;
+      --card: rgba(16, 25, 54, 0.7);
       --text: #eaf0ff;
       --muted: #a9b7d9;
       --accent: #6ea8ff;
       --accent-2: #7cf2c6;
-      --border: #28365f;
+      --border: rgba(123, 157, 236, 0.25);
+      --shadow: 0 10px 40px rgba(8, 15, 40, 0.5);
     }
 
     * {
@@ -27,9 +28,46 @@
     body {
       margin: 0;
       font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% -10%, #1f2a55 0%, var(--bg) 55%) fixed;
+      background: radial-gradient(1100px 550px at 5% -10%, #1f2b59 0%, var(--bg) 58%) fixed;
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .bg-orb {
+      position: fixed;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.42;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 280px;
+      height: 280px;
+      background: #4d80ff;
+      top: -60px;
+      right: 6%;
+      animation: floatOrb 13s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 220px;
+      height: 220px;
+      background: #59d4be;
+      bottom: 8%;
+      left: -60px;
+      animation: floatOrb 16s ease-in-out infinite reverse;
+    }
+
+    @keyframes floatOrb {
+      0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      50% {
+        transform: translateY(-16px) translateX(8px) scale(1.06);
+      }
     }
 
     a {
@@ -37,12 +75,8 @@
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
-
     .container {
-      width: min(1100px, 92%);
+      width: min(1120px, 92%);
       margin: 0 auto;
     }
 
@@ -51,7 +85,7 @@
       top: 0;
       z-index: 100;
       backdrop-filter: blur(12px);
-      background: rgba(11, 16, 32, 0.8);
+      background: rgba(7, 11, 24, 0.65);
       border-bottom: 1px solid var(--border);
     }
 
@@ -61,6 +95,7 @@
       justify-content: space-between;
       gap: 20px;
       padding: 14px 0;
+      animation: fadeDown 0.8s ease;
     }
 
     .brand {
@@ -81,28 +116,63 @@
       opacity: 0.9;
       font-weight: 500;
       font-size: 0.95rem;
+      position: relative;
+      transition: color 220ms ease;
     }
 
-    .nav-links a:hover {
-      color: var(--accent);
-      text-decoration: none;
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 220ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #ffffff;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
     }
 
     .hero {
-      padding: 84px 0 56px;
+      padding: 90px 0 56px;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
+      grid-template-columns: 1.4fr 1fr;
       gap: 28px;
       align-items: center;
     }
 
+    .hero-content {
+      animation: fadeUp 1s ease;
+    }
+
     .hero h1 {
       margin: 0 0 12px;
-      font-size: clamp(1.9rem, 5vw, 3rem);
-      line-height: 1.15;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.1;
+      background: linear-gradient(90deg, #ffffff 5%, #b6d1ff 62%, #8effd9 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shimmer 9s linear infinite;
+      background-size: 180% auto;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 0% center; }
+      to { background-position: 180% center; }
     }
 
     .hero p {
@@ -115,6 +185,12 @@
       margin: 10px 0 18px;
       color: var(--accent-2);
       font-weight: 600;
+      animation: pulseText 2.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 0.86; }
+      50% { opacity: 1; }
     }
 
     .actions {
@@ -127,25 +203,40 @@
     .btn {
       display: inline-block;
       border: 1px solid var(--border);
-      background: #18244a;
+      background: rgba(24, 36, 74, 0.8);
       color: var(--text);
       border-radius: 999px;
       padding: 10px 16px;
       font-weight: 600;
       text-decoration: none;
+      transition: transform 220ms ease, box-shadow 220ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(9, 18, 45, 0.45);
     }
 
     .btn.primary {
       background: linear-gradient(135deg, var(--accent), #89bcff);
       color: #09122d;
       border-color: transparent;
+      box-shadow: 0 10px 22px rgba(110, 168, 255, 0.38);
     }
 
     .hero-card {
-      background: linear-gradient(180deg, #16224a, var(--card));
+      background: linear-gradient(180deg, rgba(22, 34, 74, 0.92), rgba(17, 25, 54, 0.82));
       border: 1px solid var(--border);
       border-radius: 18px;
       padding: 22px;
+      box-shadow: var(--shadow);
+      animation: fadeUp 1.1s ease;
+      transform-origin: center;
+      transition: transform 260ms ease;
+    }
+
+    .hero-card:hover {
+      transform: translateY(-4px);
     }
 
     .hero-card h3 {
@@ -161,21 +252,41 @@
     }
 
     section {
-      padding: 16px 0 34px;
+      padding: 18px 0 34px;
+      scroll-margin-top: 84px;
     }
 
     .section-title {
-      font-size: 1.45rem;
+      font-size: 1.5rem;
       margin: 0 0 14px;
       color: #ffffff;
     }
 
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 700ms ease, transform 700ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     .card {
       background: var(--card);
+      backdrop-filter: blur(6px);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 18px;
       margin-bottom: 12px;
+      box-shadow: var(--shadow);
+      transition: transform 260ms ease, border-color 260ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(148, 188, 255, 0.45);
     }
 
     .card h3 {
@@ -196,21 +307,50 @@
     }
 
     .chip {
-      background: #18244a;
+      background: rgba(24, 36, 74, 0.8);
       border: 1px solid var(--border);
       color: #d4def7;
       border-radius: 999px;
       padding: 6px 10px;
       font-size: 0.85rem;
+      transition: transform 200ms ease, background 200ms ease;
+    }
+
+    .chip:hover {
+      transform: translateY(-2px);
+      background: rgba(42, 61, 119, 0.9);
     }
 
     footer {
-      margin-top: 20px;
+      margin-top: 24px;
       border-top: 1px solid var(--border);
       color: var(--muted);
       text-align: center;
       padding: 20px 0 28px;
       font-size: 0.92rem;
+      animation: fadeUp 0.9s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-14px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     @media (max-width: 880px) {
@@ -227,9 +367,23 @@
         justify-content: flex-start;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
   <header>
     <div class="container">
       <nav>
@@ -248,7 +402,7 @@
   <main class="container">
     <section class="hero" id="about">
       <div class="hero-grid">
-        <div>
+        <div class="hero-content">
           <h1>Electrical, ASIC & ML Engineer</h1>
           <p class="hero-sub">PhD Student • DFT • ASIC • ML for Hardware • Battery Systems</p>
           <p>
@@ -272,31 +426,31 @@
       </div>
     </section>
 
-    <section id="education">
+    <section id="education" class="reveal">
       <h2 class="section-title">Education</h2>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>PhD in Computer Engineering (Electrical Engineering)</h3>
         <div class="meta">Arizona State University • Jan 2026 – Present • Tempe, USA</div>
         <div class="meta">Expected Graduation: Spring 2029</div>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>Master of Science in Computer Engineering (Electrical Engineering)</h3>
         <div class="meta">Arizona State University • Aug 2021 – May 2023 • Tempe, USA</div>
         <div class="meta">GPA: 3.57 / 4.0</div>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>Bachelor of Technology in Electronics and Communication Engineering</h3>
         <div class="meta">VIT University • Jul 2016 – May 2020 • Vellore, India</div>
         <div class="meta">GPA: 3.7 / 4.0</div>
       </div>
     </section>
 
-    <section id="skills">
+    <section id="skills" class="reveal">
       <h2 class="section-title">Skills</h2>
-      <div class="card">
+      <div class="card reveal">
         <div class="chip-list">
           <span class="chip">Verilog</span>
           <span class="chip">VHDL</span>
@@ -314,28 +468,28 @@
       </div>
     </section>
 
-    <section id="projects">
+    <section id="projects" class="reveal">
       <h2 class="section-title">Projects</h2>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>Battery Health Prediction ASIC</h3>
         <p class="meta">ML-based health monitoring accelerator for lithium-ion and flow batteries.</p>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>Bidirectional DC-DC Converter</h3>
         <p class="meta">Designed and simulated converter with digital PI/PWM control in Verilog.</p>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>SRAM & Standard Cell Design</h3>
         <p class="meta">Designed NAND/NOR/SRAM with full transient and corner analysis.</p>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="reveal">
       <h2 class="section-title">Contact</h2>
-      <div class="card">
+      <div class="card reveal">
         <p class="meta">Email: yourname@gmail.com</p>
         <p class="meta">GitHub: https://github.com/yourusername</p>
         <p class="meta">LinkedIn: https://linkedin.com/in/yourprofile</p>
@@ -346,5 +500,42 @@
   <footer>
     © 2026 Harsha Nimmagadda — Portfolio
   </footer>
+
+  <script>
+    const revealItems = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          entry.target.style.transitionDelay = `${Math.min(index * 40, 220)}ms`;
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.18 });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const sections = document.querySelectorAll('main section[id]');
+
+    const setActiveLink = () => {
+      let activeId = 'about';
+      sections.forEach((section) => {
+        const top = section.offsetTop - 120;
+        if (window.scrollY >= top) {
+          activeId = section.id;
+        }
+      });
+
+      navLinks.forEach((link) => {
+        const isActive = link.getAttribute('href') === `#${activeId}`;
+        link.classList.toggle('active', isActive);
+      });
+    };
+
+    setActiveLink();
+    window.addEventListener('scroll', setActiveLink, { passive: true });
+  </script>
 </body>
 </html>
