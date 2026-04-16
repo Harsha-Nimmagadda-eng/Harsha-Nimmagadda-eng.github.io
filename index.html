@@ -1,178 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Harsha Nimmagadda | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #222;
+    :root {
+      --bg: #0b1020;
+      --bg-soft: #121a33;
+      --card: #111936;
+      --text: #eaf0ff;
+      --muted: #a9b7d9;
+      --accent: #6ea8ff;
+      --accent-2: #7cf2c6;
+      --border: #28365f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
       scroll-behavior: smooth;
     }
 
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1f2a55 0%, var(--bg) 55%) fixed;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+
     header {
-      background: #0d1117;
-      color: white;
-      padding: 20px;
       position: sticky;
       top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 16, 32, 0.8);
+      border-bottom: 1px solid var(--border);
     }
 
     nav {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
     }
 
-    nav a {
-      color: white;
-      margin: 0 15px;
+    .brand {
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      opacity: 0.9;
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
       text-decoration: none;
-      font-weight: bold;
-    }
-
-    nav a:hover {
-      color: #58a6ff;
     }
 
     .hero {
-      text-align: center;
-      padding: 60px 20px;
-      background: white;
+      padding: 84px 0 56px;
     }
 
-    .hero img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #0d1117;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.9rem, 5vw, 3rem);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 62ch;
+    }
+
+    .hero-sub {
+      margin: 10px 0 18px;
+      color: var(--accent-2);
+      font-weight: 600;
+    }
+
+    .actions {
+      margin-top: 24px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid var(--border);
+      background: #18244a;
+      color: var(--text);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #89bcff);
+      color: #09122d;
+      border-color: transparent;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, #16224a, var(--card));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .hero-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
     }
 
     section {
-      padding: 60px 20px;
-      max-width: 900px;
-      margin: auto;
+      padding: 16px 0 34px;
     }
 
-    h2 {
-      border-bottom: 2px solid #0d1117;
-      padding-bottom: 10px;
+    .section-title {
+      font-size: 1.45rem;
+      margin: 0 0 14px;
+      color: #ffffff;
     }
 
     .card {
-      background: white;
-      padding: 20px;
-      margin: 15px 0;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+    }
+
+    .meta {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .chip-list {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .chip {
+      background: #18244a;
+      border: 1px solid var(--border);
+      color: #d4def7;
+      border-radius: 999px;
+      padding: 6px 10px;
+      font-size: 0.85rem;
     }
 
     footer {
+      margin-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
       text-align: center;
-      padding: 20px;
-      background: #0d1117;
-      color: white;
+      padding: 20px 0 28px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 880px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<div class="hero">
-  <!-- 🔴 CHANGE YOUR PHOTO LINK HERE -->
-  <img src="Harsha_photo.JPG" alt="Profile Photo">
-
-  <h1>Harsha Nimmagadda</h1>
-  <h3>Electrical / ASIC / ML Engineer</h3>
-  <p>PhD Applicant | DFT | ASIC | ML for Hardware | Battery Systems</p>
-</div>
-
-<section id="about">
-  <h2>About Me</h2>
-  <p>
-  I am a Ph.D. student in the School of Electrical, Computer and Energy Engineering at Arizona State University and a member of the Performance and Resource Optimization in Networks (PROTON Lab), advised by Dr. Eirini Eleni Tsiropoulou. I received my Master of Science in Computer Engineering ( Electrical Engineering ) from Arizona State University in May 2023. Previously, I worked as a Research Assistant at Secure, Trusted, and Assured Microelectronics (STAM) Center.
-  I am a graduate student focusing on ASIC design, DFT, ML for hardware systems,
-  battery management systems, and VLSI. I am preparing for PhD and industry roles
-  in semiconductor and hardware ML domains
-
-  </p>
-</section>
-
-<section id="education">
-  <h2>Education</h2>
-  <div class="card">
-  <b>PhD in Computer Engineering ( Electrical Engineering )</b><br>
-    Arizona State University
-    Jan 2026 - Present, Tempe, USA
-    Expected graduation: Spring 2029
-  </div>
-  <div class="card">
-    <b>Master of Science in Computer Engineering ( Electrical Engineering )</b><br>
-    Arizona State University
-    Aug 2021 - May 2023, Tempe, USA
-    GPA: 3.57/4.0
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">Harsha Nimmagadda</div>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#education">Education</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
     </div>
-    <div class="card">
-    <b>Bachelor of Technology in Electronics and Communication Engineering</b><br>
-    VIT University
-    Jul 2016 - May 2020, Vellore, India
-    3.7/4.0
-  </div>
-</section>
+  </header>
 
-<section id="skills">
-  <h2>Skills</h2>
-  <div class="card">
-    • Verilog / VHDL / RTL Design<br>
-    • DFT, Scan, MBIST, ATPG<br>
-    • Python, Machine Learning<br>
-    • ASIC Physical Design<br>
-    • MATLAB, LTSpice
-  </div>
-</section>
+  <main class="container">
+    <section class="hero" id="about">
+      <div class="hero-grid">
+        <div>
+          <h1>Electrical, ASIC & ML Engineer</h1>
+          <p class="hero-sub">PhD Student • DFT • ASIC • ML for Hardware • Battery Systems</p>
+          <p>
+            I am a PhD student in the School of Electrical, Computer and Energy Engineering at Arizona State University and a member of the PROTON Lab, advised by Dr. Eirini Eleni Tsiropoulou. I received my MS in Computer Engineering from ASU and previously worked as a Research Assistant at the STAM Center.
+          </p>
+          <div class="actions">
+            <a class="btn primary" href="#contact">Contact Me</a>
+            <a class="btn" href="#projects">View Projects</a>
+          </div>
+        </div>
 
-<section id="projects">
-  <h2>Projects</h2>
-  <div class="card">
-    <b>Battery Health Prediction ASIC</b><br>
-    ML-based health monitoring accelerator for lithium-ion and flow batteries.
-  </div>
+        <aside class="hero-card">
+          <h3>Current Focus</h3>
+          <ul>
+            <li>ASIC design and DFT flows</li>
+            <li>Hardware-aware machine learning</li>
+            <li>Battery health and management systems</li>
+            <li>VLSI and semiconductor research</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
 
-  <div class="card">
-    <b>Bidirectional DC-DC Converter</b><br>
-    Designed and simulated converter with digital PI/PWM control in Verilog.
-  </div>
+    <section id="education">
+      <h2 class="section-title">Education</h2>
 
-  <div class="card">
-    <b>SRAM & Standard Cell Design</b><br>
-    Designed NAND/NOR/SRAM with full transient and corner analysis.
-  </div>
-</section>
+      <div class="card">
+        <h3>PhD in Computer Engineering (Electrical Engineering)</h3>
+        <div class="meta">Arizona State University • Jan 2026 – Present • Tempe, USA</div>
+        <div class="meta">Expected Graduation: Spring 2029</div>
+      </div>
 
-<section id="contact">
-  <h2>Contact</h2>
-  <div class="card">
-    📧 Email: yourname@gmail.com <br>
-    🔗 GitHub: https://github.com/yourusername <br>
-    🔗 LinkedIn: https://linkedin.com/in/yourprofile
-  </div>
-</section>
+      <div class="card">
+        <h3>Master of Science in Computer Engineering (Electrical Engineering)</h3>
+        <div class="meta">Arizona State University • Aug 2021 – May 2023 • Tempe, USA</div>
+        <div class="meta">GPA: 3.57 / 4.0</div>
+      </div>
 
-<footer>
-  © 2026 Harsha Nimmagadda — Portfolio
-</footer>
+      <div class="card">
+        <h3>Bachelor of Technology in Electronics and Communication Engineering</h3>
+        <div class="meta">VIT University • Jul 2016 – May 2020 • Vellore, India</div>
+        <div class="meta">GPA: 3.7 / 4.0</div>
+      </div>
+    </section>
 
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <div class="card">
+        <div class="chip-list">
+          <span class="chip">Verilog</span>
+          <span class="chip">VHDL</span>
+          <span class="chip">RTL Design</span>
+          <span class="chip">DFT</span>
+          <span class="chip">Scan</span>
+          <span class="chip">MBIST</span>
+          <span class="chip">ATPG</span>
+          <span class="chip">Python</span>
+          <span class="chip">Machine Learning</span>
+          <span class="chip">ASIC Physical Design</span>
+          <span class="chip">MATLAB</span>
+          <span class="chip">LTSpice</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="card">
+        <h3>Battery Health Prediction ASIC</h3>
+        <p class="meta">ML-based health monitoring accelerator for lithium-ion and flow batteries.</p>
+      </div>
+
+      <div class="card">
+        <h3>Bidirectional DC-DC Converter</h3>
+        <p class="meta">Designed and simulated converter with digital PI/PWM control in Verilog.</p>
+      </div>
+
+      <div class="card">
+        <h3>SRAM & Standard Cell Design</h3>
+        <p class="meta">Designed NAND/NOR/SRAM with full transient and corner analysis.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="card">
+        <p class="meta">Email: yourname@gmail.com</p>
+        <p class="meta">GitHub: https://github.com/yourusername</p>
+        <p class="meta">LinkedIn: https://linkedin.com/in/yourprofile</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Harsha Nimmagadda — Portfolio
+  </footer>
 </body>
 </html>
